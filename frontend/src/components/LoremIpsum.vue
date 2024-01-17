@@ -4,30 +4,32 @@
     <button @click="generateLoremIpsum" type="submit">Generate</button>
     <div v-if="generatedText">
       <h2>Generated Lorem Ipsum Text:</h2>
-      <p v-for="(paragraph, index) in generatedText" :key="index">{{ paragraph }}</p>
+      <p v-for="(paragraph, index) in generatedText" :key="index">
+        {{ paragraph }}
+      </p>
     </div>
     <div v-if="errorMsg" class="error">
       <p>{{ errorMsg }}. Please try again.</p>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   setup() {
     const generatedText = ref(null);
     const errorMsg = ref(null);
-    
+
     const generateLoremIpsum = () => {
       errorMsg.value = null;
-      fetch('http://localhost:3000/lorem')
-        .then(response => response.json())
-        .then(data => {
+      fetch("http://localhost:3000/lorem")
+        .then((response) => response.json())
+        .then((data) => {
           generatedText.value = data;
         })
-        .catch(error => {
+        .catch((error) => {
           errorMsg.value = error.message;
           console.error(error);
         });
@@ -36,15 +38,15 @@ export default {
     return {
       generatedText,
       generateLoremIpsum,
-      errorMsg
+      errorMsg,
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 .error {
-  background-color: #FBACBE;
+  background-color: #fbacbe;
   padding: 0.5rem;
   margin-top: 1rem;
 }

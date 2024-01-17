@@ -8,9 +8,9 @@ const config = { port: process.env.PORT || 3000 }
 app.use(cors())
 
 // your API route(s) here
-import { LoremIpsum } from "lorem-ipsum";
+//import { LoremIpsum } from "lorem-ipsum";
 
-// const LoremIpsum = require("lorem-ipsum").LoremIpsum;
+const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -25,8 +25,8 @@ const lorem = new LoremIpsum({
 
 lorem.generateParagraphs(7);
 
-app.get('/lorem', (req, res) => {
-  res.json({lorem: lorem.generate})
+app.get('/lorem/', (req, res) => {
+  res.json({lorem: lorem.generateSentences(5)})
 })
 
 app.get('*', function (req, res) {
